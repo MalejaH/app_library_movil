@@ -1,56 +1,83 @@
-# Welcome to your Expo app 👋
+# Library App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App móvil de biblioteca hecha con [Expo](https://expo.dev) y Expo Router. Permite registrarse, iniciar sesión, explorar libros y gestionar préstamos, con almacenamiento local en SQLite y sincronización con un servidor.
 
-## Get started
+## Características
 
-1. Install dependencies
+- Registro e inicio de sesión
+- Catálogo de libros y detalle de cada libro
+- Gestión de préstamos
+- Perfil de usuario
+- Funcionamiento offline con base de datos local (SQLite) y sincronización
+- Aviso de estado de conexión
+
+## Tecnologías
+
+- Expo + Expo Router (navegación basada en archivos)
+- React Native y TypeScript
+- expo-sqlite
+- Jest para pruebas
+
+## Requisitos
+
+- Node.js 20 o superior
+- [Expo Go](https://expo.dev/go) en tu celular, o un emulador Android/iOS
+- Un backend en ejecución (la URL se configura abajo)
+
+## Configuración
+
+1. Instala las dependencias:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Crea tu archivo de entorno a partir del ejemplo:
 
    ```bash
-   npx expo start
+   cp .env.example .env
    ```
 
-In the output, you'll find options to open the app in a
+3. Edita `.env` y completa la URL de tu API:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```
+   EXPO_PUBLIC_API_URL=http://192.168.x.x:3000
+   ```
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   > Si pruebas en un celular físico, usa la IP de tu PC en la red local, no `localhost`.
+   > Las variables con prefijo `EXPO_PUBLIC_` quedan visibles dentro de la app: nunca pongas claves secretas ahí.
 
-## Get a fresh project
+4. Inicia la app:
 
-When you're ready, run:
+   ```bash
+   npx expo start -c
+   ```
+
+   Escanea el QR con Expo Go (el celular y la PC deben estar en la misma red Wi-Fi).
+
+## Pruebas
 
 ```bash
-npm run reset-project
+npm test
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Estructura del proyecto
 
-### Other setup steps
+```
+src/
+├── app/          # Pantallas y rutas (Expo Router)
+├── components/   # Componentes reutilizables
+├── config/       # Lectura de variables de entorno
+├── db/           # Migraciones y repositorios SQLite
+├── hooks/        # Hooks personalizados
+├── lib/          # Utilidades
+├── providers/    # Contextos de autenticación y datos
+├── services/     # API, autenticación, préstamos y sincronización
+└── types/        # Tipos de TypeScript
+__tests__/        # Pruebas unitarias e integración
+test-utils/       # Utilidades para pruebas
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Licencia
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+MIT
