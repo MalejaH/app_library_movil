@@ -41,3 +41,14 @@ example
 # generated native folders
 /ios
 /android
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Logs
+*.log
